@@ -27,48 +27,58 @@ const Headlines = () => {
     fetchHeadLines();
   });
   return (
-    <div
-      style={{
-        display: "flex",
-        flexWrap: "wrap",
-        justifyContent: "space-evenly",
-        marginLeft: "20px",
-      }}
-    >
-      {headlines.map((article) => (
-        <div key={article.title}>
-          <Card style={{ maxWidth: "300px", marginBottom: "50px" }}>
-            <Paper>
-              <CardHeader
-                title={article.author}
-                //   subheader={`${article.publsihedAt}`.toDateString()}
-                // .toISOString()
-                // .substring(0, 10)}
-              ></CardHeader>
-              <CardContent>
-                <Typography
-                  paragraph
-                  variant="body2"
-                  color="textSecondary"
-                  component="p"
-                  align="left"
-                >
-                  {article.description}
-                </Typography>
-                <p>{article.title}</p>
-              </CardContent>
-              <a target="_blank" href={article.url} rel="noopener noreferrer">
-                <img
-                  src={article.urlToImage}
-                  width="100%"
-                  height="200"
-                  alt={article.author}
-                />
-              </a>
-            </Paper>
-          </Card>
-        </div>
-      ))}
+    <div>
+      <Typography variant="h3">Headlines</Typography>
+      <div
+        style={{
+          display: "flex",
+          flexWrap: "wrap",
+          justifyContent: "space-evenly",
+          marginLeft: "20px",
+        }}
+      >
+        {headlines.map((article) => (
+          <div key={article.title}>
+            <Card
+              style={{
+                maxWidth: "300px",
+                minHeight: "400px",
+                marginBottom: "50px",
+                justifyContent: "space-evenly",
+              }}
+            >
+              <Paper>
+                <CardHeader
+                  title={article.author}
+                  //   subheader={`${article.publsihedAt}`.toDateString()}
+                  // .toISOString()
+                  // .substring(0, 10)}
+                ></CardHeader>
+                <CardContent>
+                  <Typography
+                    paragraph
+                    variant="body2"
+                    color="textSecondary"
+                    component="p"
+                    align="left"
+                  >
+                    {article.description}
+                  </Typography>
+                  <p>{article.title}</p>
+                </CardContent>
+                <a target="_blank" href={article.url} rel="noopener noreferrer">
+                  <img
+                    src={article.urlToImage}
+                    width="100%"
+                    height="200"
+                    alt={article.author}
+                  />
+                </a>
+              </Paper>
+            </Card>
+          </div>
+        ))}
+      </div>
     </div>
   );
 };
