@@ -1,8 +1,13 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import requests from "../requests";
-import moment from "moment";
-import { Card, Typography, CardContent, CardHeader } from "@material-ui/core";
+import {
+  Card,
+  Typography,
+  CardContent,
+  CardHeader,
+  Paper,
+} from "@material-ui/core";
 
 const Headlines = () => {
   const [headlines, setHeadlines] = useState([]);
@@ -16,7 +21,7 @@ const Headlines = () => {
       );
 
       const data = await res;
-      console.log(data.data.articles);
+      //   console.log(data.data.articles);
       setHeadlines(data.data.articles);
     };
     fetchHeadLines();
@@ -27,36 +32,40 @@ const Headlines = () => {
         display: "flex",
         flexWrap: "wrap",
         justifyContent: "space-evenly",
+        marginLeft: "20px",
       }}
     >
       {headlines.map((article) => (
         <div key={article.title}>
           <Card style={{ maxWidth: "300px", marginBottom: "50px" }}>
-            <CardHeader
-              title={article.author}
-              subheader={moment(`${article.publsihedAt}`).format("YYYY-MM-DD")}
-              // .toISOString()
-              // .substring(0, 10)}
-            ></CardHeader>
-            <CardContent>
-              <Typography
-                paragraph
-                variant="body2"
-                color="textSecondary"
-                component="p"
-              >
-                {article.description}
-              </Typography>
-              <p>{article.title}</p>
-            </CardContent>
-            <a target="_blank" href={article.url} rel="noopener noreferrer">
-              <img
-                src={article.urlToImage}
-                width="100%"
-                height="200"
-                alt={article.author}
-              />
-            </a>
+            <Paper>
+              <CardHeader
+                title={article.author}
+                //   subheader={`${article.publsihedAt}`.toDateString()}
+                // .toISOString()
+                // .substring(0, 10)}
+              ></CardHeader>
+              <CardContent>
+                <Typography
+                  paragraph
+                  variant="body2"
+                  color="textSecondary"
+                  component="p"
+                  align="left"
+                >
+                  {article.description}
+                </Typography>
+                <p>{article.title}</p>
+              </CardContent>
+              <a target="_blank" href={article.url} rel="noopener noreferrer">
+                <img
+                  src={article.urlToImage}
+                  width="100%"
+                  height="200"
+                  alt={article.author}
+                />
+              </a>
+            </Paper>
           </Card>
         </div>
       ))}
