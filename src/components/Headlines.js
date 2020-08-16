@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import requests from "../requests";
-import { Card, Typography } from "@material-ui/core";
+import moment from "moment";
+import { Card, Typography, CardContent, CardHeader } from "@material-ui/core";
 
 const Headlines = () => {
   const [headlines, setHeadlines] = useState([]);
@@ -15,20 +16,39 @@ const Headlines = () => {
       );
 
       const data = await res;
-      //   console.log(data.data.articles);
+      console.log(data.data.articles);
       setHeadlines(data.data.articles);
     };
     fetchHeadLines();
   });
   return (
-    <div>
+    <div
+      style={{
+        display: "flex",
+        flexWrap: "wrap",
+        justifyContent: "space-evenly",
+      }}
+    >
       {headlines.map((article) => (
         <div key={article.title}>
-          <Card style={{ maxWidth: "400px" }}>
-            <p>{article.author}</p>
-            <p>{article.content}</p>
-            <Typography paragraph>{article.description}</Typography>
-            <p>{article.title}</p>
+          <Card style={{ maxWidth: "300px", marginBottom: "50px" }}>
+            <CardHeader
+              title={article.author}
+              subheader={moment(`${article.publsihedAt}`).format("YYYY-MM-DD")}
+              // .toISOString()
+              // .substring(0, 10)}
+            ></CardHeader>
+            <CardContent>
+              <Typography
+                paragraph
+                variant="body2"
+                color="textSecondary"
+                component="p"
+              >
+                {article.description}
+              </Typography>
+              <p>{article.title}</p>
+            </CardContent>
             <a target="_blank" href={article.url} rel="noopener noreferrer">
               <img
                 src={article.urlToImage}
